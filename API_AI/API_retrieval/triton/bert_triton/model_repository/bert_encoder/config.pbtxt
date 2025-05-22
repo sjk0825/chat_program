@@ -1,6 +1,6 @@
 name: "bert_encoder"
 platform: "onnxruntime_onnx"
-max_batch_size: 0  # 배치 비활성화 (원하면 수정)
+max_batch_size: 32  # 배치 비활성화 (원하면 수정)
 
 input [
   {
@@ -12,14 +12,19 @@ input [
     name: "attention_mask"
     data_type: TYPE_INT64
     dims: [ -1 ]
+  },
+  {
+   name: "token_type_ids"
+   data_type: TYPE_INT64
+   dims: [ -1 ]
   }
 ]
 
 output [
   {
-    name: "embedding"
+    name: "last_hidden_state"
     data_type: TYPE_FP32
-    dims: [ 384 ]  # 임베딩 크기 (MiniLM은 384)
+    dims: [ -1, 384 ]  # 임베딩 크기 (MiniLM은 384)
   }
 ]
 

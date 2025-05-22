@@ -22,3 +22,5 @@
 # training
 
 # chatting
+![chat-1](https://github.com/user-attachments/assets/3faa9c38-a33c-4a8b-9b7c-f4f9f47ea9c5)
+

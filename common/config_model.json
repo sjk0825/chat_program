@@ -1,0 +1,17 @@
+{
+    "text-embedding-3-small":{
+        "dim":1536,
+        "api_key": 
+    },
+    "intfloat/multilingual-e5-large":{
+        "dim":1024,
+        "api_key": 
+    },
+    "gpt-4o-mini":{
+        "api_key": 
+        "max_context":200
+    },
+    "serper":{
+        "api_key":
+    }
+}

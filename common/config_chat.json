@@ -1,0 +1,6 @@
+{
+    "embedder":  "text-embedding-3-small",
+    "web_search": true,
+    "generation_model": "gpt-4o-mini",
+    "crawl": ""
+}

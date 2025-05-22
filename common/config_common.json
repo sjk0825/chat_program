@@ -1,0 +1,7 @@
+{
+    "backend_url":"http://localhost:5000/",
+    "vectordb_url":"http://172.22.245.142:5001/",
+    "retrieval_url":"http://172.22.245.142:2234/",
+    "generation_url": "http://172.22.245.142:5002/",
+    "encoder_url": "http://172.22.245.142:"
+}

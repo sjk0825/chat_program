@@ -1,0 +1,24 @@
+{
+    "dataset":{
+        "train":"",
+        "valid":"",
+        "test":""
+    },
+    "model":{
+
+    },
+    "SentenceTransformerTrainingArguments":{
+
+    },
+    "losses":{
+
+    },
+    "evaluator":{
+
+    },
+    "accelerate":{
+        "deepspeed":{
+            "stage": "3"
+        }
+    }
+}

@@ -55,6 +55,9 @@ class retrievalManager():
 
         return retrieved_text # List
 
+    def get_embedding(self, texts):
+        return self.platform_manager.get_embedding(texts)
+
 class openaiManager():
     def __init__(self, client, embedder):
         self.client = client
@@ -62,16 +65,14 @@ class openaiManager():
         return
     
 
-    def get_embedding(self,user_message):
-        # we use only user_messages
-        texts = user_message
+    def get_embedding(self,texts):
         if isinstance(texts, str):
             texts = [texts]
             
         batch = 50
         embeddings = []
 
-        for _ in range(len(texts),50):
+        for _ in range(len(texts),batch):
             response = self.client.embeddings.create(input=texts, model=self.embedder)
             embeddings.extend([item.embedding for item in response.data])
 

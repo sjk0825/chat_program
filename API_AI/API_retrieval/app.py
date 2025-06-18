@@ -8,10 +8,6 @@ from functions import set_retrieval
 logger = logging.getLogger("Retireval Logger")
 logger.setLevel(logging.INFO)
 
-
-config_common = open('../../common/config_common.json','r',encoding='utf-8')
-config_common = json.load(config_common)
-vectordb_url  = config_common['vectordb_url']
 retriever     = None
 
 # set obj
@@ -32,18 +28,14 @@ def retrieval():
 
     return jsonify({"response": '. '.join(retrieved_text)})
 
-'''
 @app.route("/embedding", methods=["POST"])
 def embedding():
     data = request.json  # JSON 요청 받기
     texts           = data.get("texts", "chat_history value does not exists")
-    config_model    = data.get("config_model", "embedder value does not exists")
-    config_chat     = data.get("config_chat", "embedder value does not exists")
 
-    embedded_text   = get_embedding(texts, config_model=config_model, config_chat=config_chat)
+    embedded_texts   = retriever.get_embedding(texts)
 
-    return jsonify({"response": embedded_text})
-'''
+    return jsonify({"response": embedded_texts})
 
 @app.route("/set_retriever", methods=["POST"])
 def set_retriever():

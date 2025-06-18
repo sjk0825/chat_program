@@ -1,27 +1,29 @@
 {
+    "SentenceTransformer":{
+        "name":"microsoft/mpnet-base"
+    },
     "dataset":{
-        "train":"",
-        "valid":"",
-        "test":""
+        "name":"sentence-transformers/all-nli",
+        "train_size":100000
     },
-    "model":{
-
-    },
+    "loss":"MultipleNegativesRankingLoss",
     "SentenceTransformerTrainingArguments":{
-
+        "output_dir":"models/mpnet-base-all-nli-triplet",
+        "num_train_epochs":1,
+        "per_device_train_batch_size":16,
+        "per_device_eval_batch_size":16,
+        "learning_rate":2e-5,
+        "warmup_ratio":0.1,
+        "fp16":true,
+        "bf16":false,
+        "eval_strategy":"steps",
+        "eval_steps":100,
+        "save_strategy":100,
+        "save_total_limit":2,
+        "logging_steps":100,
+        "run_name":"mpnet-base-all-nli-triplet"
     },
-    "losses":{
-
-    },
-    "evaluator":{
-
-    },
-    "accelerate":{
-        "deepspeed":{
-            "stage": "3"
-        }
-    },
-    "logger":{
-        
-    }
+    "evaluator":"TripletEvaluator",
+    "save":"models/mpnet-base-all-nli-triplet/final",
+    "push_to_hub":"mpnet-base-all-nli-triplet"
 }

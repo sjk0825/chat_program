@@ -1,0 +1,27 @@
+name: "preprocessing"
+backend: "python"
+max_batch_size: 8
+input [
+  {
+    name: "RAW_INPUT"
+    data_type: TYPE_STRING
+    dims: [-1]
+  }
+]
+output [
+  {
+    name: "input_ids"
+    data_type: TYPE_INT64
+    dims: [ -1 ]  # sequence length
+  },
+  {
+    name: "attention_mask"
+    data_type: TYPE_INT64
+    dims: [ -1 ]
+  },
+  {
+    name: "token_type_ids"
+    data_type: TYPE_INT64
+    dims: [ -1 ]
+  }
+]

@@ -1,0 +1,62 @@
+name: "ensemble"
+platform: "ensemble"
+max_batch_size: 8
+input [
+  {
+    name: "RAW_INPUT"
+    data_type: TYPE_STRING
+    dims: [-1]
+  }
+]
+output [
+  {
+    name: "output__0"
+    data_type: TYPE_FP32
+    dims: [-1,384]
+  }
+]
+
+ensemble_scheduling {
+  step [
+    {
+      model_name: "preprocessing"
+      model_version: -1
+      input_map {
+        key: "RAW_INPUT"
+        value: "RAW_INPUT"
+      }
+      output_map {
+        key: "input_ids"
+        value: "input_ids"
+      }
+      output_map {
+        key: "attention_mask"
+        value: "attention_mask"
+      }
+      output_map {
+        key: "token_type_ids"
+        value: "token_type_ids"
+      }
+    },
+    {
+      model_name: "bert_encoder"
+      model_version: -1
+      input_map {
+        key: "input_ids"
+        value: "input_ids"
+      }
+      input_map {
+        key: "attention_mask"
+        value: "attention_mask"
+      }
+      input_map {
+        key: "token_type_ids"
+        value: "token_type_ids"
+      }
+      output_map {
+        key: "last_hidden_state"
+        value: "output__0"
+      }
+    }
+  ]
+}

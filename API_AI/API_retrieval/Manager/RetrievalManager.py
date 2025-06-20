@@ -31,23 +31,23 @@ class retrievalManager():
             
         return
     
-    def retrieval(self,user_message):
+    def retrieval(self,items):
 
         # get embedding from platform model # List
-        embedded_usermessage = self.platform_manager.get_embedding(user_message)
+        embedded_usermessage = self.platform_manager.get_embedding(items)
 
         # search vector db 
         retrieved_text = self.search_vectordb(embedded_usermessage)
 
         return retrieved_text
 
-    def search_vectordb(self,embedded_text):
+    def search_vectordb(self,embedded_item):
 
         # search
         sending_data = {
             "config_model"  : self.config_model,
             "config_chat"   : self.config_chat,
-            "embedded_text" : embedded_text
+            "embedded_text" : embedded_item # TODO item
         }
 
         response = requests.post(self.vectordb_url+'/search_vectordb', json=sending_data)

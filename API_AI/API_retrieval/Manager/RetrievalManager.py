@@ -34,10 +34,10 @@ class retrievalManager():
     def retrieval(self,items):
 
         # get embedding from platform model # List
-        embedded_usermessage = self.platform_manager.get_embedding(items)
+        embedded_items = self.platform_manager.get_embedding(items)
 
         # search vector db 
-        retrieved_text = self.search_vectordb(embedded_usermessage)
+        retrieved_text = self.search_vectordb(embedded_items)
 
         return retrieved_text
 
@@ -63,7 +63,6 @@ class openaiManager():
         self.client = client
         self.embedder = embedder
         return
-    
 
     def get_embedding(self,items):
         if isinstance(items, str):

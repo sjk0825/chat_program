@@ -55,8 +55,8 @@ class retrievalManager():
 
         return retrieved_text # List
 
-    def get_embedding(self, texts):
-        return self.platform_manager.get_embedding(texts)
+    def get_embedding(self, items):
+        return self.platform_manager.get_embedding(items)
 
 class openaiManager():
     def __init__(self, client, embedder):
@@ -65,15 +65,15 @@ class openaiManager():
         return
     
 
-    def get_embedding(self,texts):
-        if isinstance(texts, str):
-            texts = [texts]
+    def get_embedding(self,items):
+        if isinstance(items, str):
+            items = [items]
             
         batch = 50
         embeddings = []
 
-        for _ in range(len(texts),batch):
-            response = self.client.embeddings.create(input=texts, model=self.embedder)
+        for _ in range(len(items),batch):
+            response = self.client.embeddings.create(input=items, model=self.embedder)
             embeddings.extend([item.embedding for item in response.data])
 
         return embeddings
@@ -84,17 +84,17 @@ def huggingfaceAPIManager():
         self.embedder = embedder
         return
     
-    def get_embedding(self,user_message):
+    def get_embedding(self,items):
         # we use only user_messages
-        texts = user_message
-        if isinstance(texts, str):
-            texts = [texts]
+
+        if isinstance(items, str):
+            items = [items]
             
         batch = 50  # manually batch, check document for api option
         embeddings = []
 
-        for _ in range(len(texts),50):
-            response = self.client.feature_extraction(texts)
+        for _ in range(len(items),50):
+            response = self.client.feature_extraction(items)
             embeddings.extend([item.embedding for item in response.data])
 
         return embeddings

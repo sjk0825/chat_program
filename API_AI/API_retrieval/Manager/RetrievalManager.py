@@ -1,5 +1,6 @@
 
 import requests
+import base64
 
 from openai import OpenAI
 from huggingface_hub import InferenceClient

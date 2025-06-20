@@ -1,6 +1,7 @@
 import gradio as gr
 import requests
 import json
+from functions import to_base64
 
 config_common = open('../common/config_common.json','r',encoding='utf-8')
 config_common = json.load(config_common)
@@ -74,6 +75,7 @@ def set_ai():
     set_generator()
     sef_retriever()
     return
+
 with gr.Blocks() as demo:
     # setting generator
 
@@ -84,6 +86,11 @@ with gr.Blocks() as demo:
     # db setting
     db_btn = gr.Button("db setting")
     db_btn.click(set_vectordb, inputs=[], outputs=[])
+
+    with gr.Row():
+        img_input = gr.Image(type="pil", label="이미지를 업로드하세요")
+        b64_output = gr.Textbox(label="Base64 문자열", lines=5)
+    img_input.change(to_base64, inputs=img_input, outputs=b64_output) # TODO retriever base64 check
 
     # chat base
     chatbot = gr.Chatbot(label="Chat with History")
